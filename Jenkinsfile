@@ -17,12 +17,19 @@ pipeline {
                 sh './mvnw test'
             }
         }
-         stage('Docker build') {
+         /*stage('Docker build') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 }
             }
-        }
+        }*/
+        stage('Build docker image') {
+            steps {
+                script {
+                    sh 'docker build -t yassinebouksaier/devops-project .'
+                }
+            }
+       
     }
 }
