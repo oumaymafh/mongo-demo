@@ -1,5 +1,8 @@
 pipeline {
     agent any
+      environment {
+        DOCKER_IMAGE = 'emnaboukhris10/devops_project'
+    }
 
     stages {
         stage('Clone repository') {
@@ -16,6 +19,13 @@ pipeline {
             steps {
                 sh './mvnw test'
             }
+                    stage('Docker build') {
+            steps {
+                script {
+                    docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                }
+            }
+
         }
     }
 }
