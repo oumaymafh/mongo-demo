@@ -61,6 +61,7 @@
                 </configuration>
             </plugin>
         </plugins>
+             <finalName>my-application</fileName>
     </build>
 
 </project>
