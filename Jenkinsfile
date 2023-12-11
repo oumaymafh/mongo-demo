@@ -24,10 +24,10 @@ pipeline {
                 }
             }
         }*/
-        stage('Build docker image') {
+        stage('docker build') {
             steps {
                 script {
-                    sh 'docker build -t oumeymafarhat/devops-project .'
+                    sh 'docker build -t oumaymafh/mongo-demo .'
                 }
             }
         }
