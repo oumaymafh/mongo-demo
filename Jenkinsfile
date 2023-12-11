@@ -27,7 +27,7 @@ pipeline {
         stage('docker build') {
             steps {
                 script {
-                    sh 'docker build -t oumaymafh/mongo-demo .'
+                    sh 'docker build -t oumaymafh/project-devops .'
                 }
             }
         }
