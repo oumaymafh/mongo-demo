@@ -30,6 +30,7 @@ pipeline {
                     sh 'docker build -t oumeymafarhat/devops-project .'
                 }
             }
+        }
        
     }
 }
