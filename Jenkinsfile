@@ -17,21 +17,20 @@ pipeline {
             }
         }
          
-        stage('docker build image') {
+        stage('Docker build') {
             steps {
                 script {
-                    sh 'docker build -t oumeymafarhat/devops-project .'
+                    docker.build("oumeymafarhat/devops-project")
                 }
             }
         }
-        stage('Build image to Hub') {
+        stage('Push Docker Image') {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         docker.image("oumeymafarhat/devops-project").push()
                     }
                 }
-
             }
         }
          stage('Build Docker Compose') {
@@ -40,17 +39,33 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Push Docker Image') {
+        stage('Up Docker Compose') {
             steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        docker.image("oumeymafarhat/devops-project").push() 
-                    }
-                }
+                // Start your Docker Compose setup
+                sh 'docker-compose up -d'
             }
         }
-    }    
-}
+         
+       stage('Check Volume Persistence') {
+            steps {
+                // Run a command that checks volume persistence
+                // Replace this with the actual command you want to run
+                sh 'docker inspect mongo-demo_mongodb_data_container'
+            }
+        }
+   
+
+         post {
+        always {
+            // Stop your Docker Compose setup
+            sh 'docker-compose down'
+        }
+    }
+
+   }
+ }
+    
+
     
 
         
