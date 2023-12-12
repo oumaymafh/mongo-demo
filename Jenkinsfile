@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        docker.image("oumeymafh/devops-project").push()
+                        docker.image("oumeymafarhat/devops-project").push()
                     }
                 }
 
