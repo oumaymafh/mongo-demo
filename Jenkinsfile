@@ -1,10 +1,4 @@
 pipeline {
-
-    environment {
-        PATH = "$PATH:/usr/bin"
-    }
-}
-pipeline {
     agent any
     stages {
         stage('Clone repository') {
@@ -30,6 +24,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy with Docker Compose') {
+           steps {
+             script {
+                    sh 'docker-compose up -d'
+        }
+    }
+}
         stage('Push Docker Image') {
             steps {
                 script {
@@ -39,26 +40,9 @@ pipeline {
                 }
             }
         }
-         stage('Build Docker Compose') {
-            steps {
-                // Build your Docker Compose setup
-                sh 'docker-compose build'
-            }
-        }
-        stage('Up Docker Compose') {
-            steps {
-                // Start your Docker Compose setup
-                sh 'docker-compose up -d'
-            }
-        }
          
-       stage('Check Volume Persistence') {
-            steps {
-                // Run a command that checks volume persistence
-                // Replace this with the actual command you want to run
-                sh 'docker inspect mongo-demo_mongodb_data_container'
-            }
-        }
+         
+      
    
 
 
