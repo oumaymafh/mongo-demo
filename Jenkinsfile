@@ -19,13 +19,21 @@ pipeline {
             steps {
                 sh './mvnw test'
             }
-                    stage('Docker build') {
+  stage('Docker build') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 }
             }
-
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        docker.image("${DOCKER_IMAGE}:${env.BUILD_NUMBER}").push()
+                    }
+                }
+            }
         }
     }
 }
