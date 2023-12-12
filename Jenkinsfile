@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        docker.image("oumeymafarhat/devops-project").push()
+                        docker.image("oumaymafh/devops-project").push()
                     }
                 }
 
