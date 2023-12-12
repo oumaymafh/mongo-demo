@@ -1,4 +1,10 @@
 pipeline {
+
+    environment {
+        PATH = "$PATH:/usr/bin"
+    }
+}
+pipeline {
     agent any
     stages {
         stage('Clone repository') {
