@@ -34,6 +34,12 @@ pipeline {
         }
     }
 }
+         stage('Build Docker Compose') {
+            steps {
+                // Build your Docker Compose setup
+                sh 'docker-compose build'
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 script {
