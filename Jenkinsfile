@@ -25,14 +25,22 @@ pipeline {
                 }
             }
         }
-       /* stage('Docker build') {
+        stage('Build image to Hub') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-                }
+                        withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+                        sh 'docker login -u oumaymafh -p ${dockerhub}'
+                        }
+                    sh 'docker push oumaymafh/devops-project'
+
+                        }
             }
-        }*/
+        }
+    }
+    
+}
+
         
        
-    }
-}
+    
+
