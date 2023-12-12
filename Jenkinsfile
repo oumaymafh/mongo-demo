@@ -20,7 +20,7 @@ pipeline {
         stage('docker build image') {
             steps {
                 script {
-                    sh 'docker build -t oumeymafarhat/project-devops .'
+                    sh 'docker build -t oumeymafarhat/devops-project .'
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        docker.image("oumeymafarhat/project-devops").push()
+                        docker.image("oumeymafarhat/devops-project").push()
                     }
                 }
 
