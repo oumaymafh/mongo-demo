@@ -28,17 +28,16 @@ pipeline {
         stage('Build image to Hub') {
             steps {
                 script {
-                        withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-                        sh 'docker login -u oumaymafh -p ${dockerhub}'
-                        }
-                    sh 'docker push oumaymafh/devops-project'
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        docker.image("oumeymafh/devops-project").push()
+                    }
+                }
 
-                        }
             }
         }
-    }
+            }
+        }
     
-}
 
         
        
