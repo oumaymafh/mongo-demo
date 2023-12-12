@@ -55,12 +55,6 @@ pipeline {
         }
    
 
-     post {
-        always {
-            // Stop your Docker Compose setup
-            sh 'docker-compose down'
-        }
-    }
 
    }
  }
