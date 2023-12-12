@@ -18,20 +18,20 @@ pipeline {
             }
         }
          
-        stage('docker build') {
+        stage('docker build image') {
             steps {
                 script {
                     sh 'docker build -t oumaymafh/project-devops .'
                 }
             }
         }
-        stage('Docker build') {
+       /* stage('Docker build') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                 }
             }
-        }
+        }*/
         
        
     }
