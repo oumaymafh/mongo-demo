@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    withKubeConfig([credentialsId: 'KubeConf']) {
+                    withKubeConfig([credentialsId: 'config']) {
                     sh """
                           minikube kubectl -- apply -f deploymentservice.yaml                    
                     """
