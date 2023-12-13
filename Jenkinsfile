@@ -30,7 +30,7 @@ pipeline {
                 script {
                     echo 'Building Docker image...'
 
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {'
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 
                         sh "echo $PASS | docker login -u $USER --password-stdin"
 
