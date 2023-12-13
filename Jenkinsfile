@@ -20,7 +20,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                    docker.build("oumeymafh:devops-project")
                 }
             }
         }
@@ -35,17 +35,21 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        docker.image("${DOCKER_IMAGE}:${env.BUILD_NUMBER}").push()
+                        docker.image("oumeymafh:devops-project").push()
                     }
                 }
             }
         }
-        stage('Deploy to k8s') {
+        stage('Deploy') {
             steps {
                 script {
-                    kubernetesDeploy ( configs: 'deploymentservice.yaml',  kubeconfigId: 'k8sconf' )
+                    withKubeConfig([credentialsId: 'KubeConf']) {
+                    sh """
+                          minikube kubectl -- apply -f deploymentservice.yaml                    
+                    """
+                    }
+                }
             }
-          } 
         }
             
    }
