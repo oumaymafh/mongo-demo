@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Clone repository') {
             steps {
@@ -44,8 +43,9 @@ pipeline {
         stage('Deploy to k8s') {
             steps {
                 script {
-                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'k8sconfig' )}
-                       } 
+                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'k8sconfig')
+            }
+          } 
         }
             
    }
