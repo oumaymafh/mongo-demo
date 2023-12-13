@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    environment {
-        HOME = '/home/oumayma'
-    }
+
     stages {
         stage('Clone repository') {
             steps {
