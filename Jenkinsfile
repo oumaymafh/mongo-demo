@@ -20,7 +20,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 script {
-                    docker.build("oumeymafarhat:devops-project")
+                    docker.build("oumeymafarhat/devops-project")
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
 
                         sh "echo $PASS | docker login -u $USER --password-stdin"
 
-                        sh 'docker push oumeymafarhat:devops-project'
+                        sh 'docker push oumeymafarhat/devops-project'
                     }
                 }
                 }
