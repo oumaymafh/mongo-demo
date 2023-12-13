@@ -42,11 +42,12 @@ pipeline {
         }
         stage('Deploy to k8s') {
             steps {
-                script {kubernetesDeploy configs: 'deploymentservice.yam',kubeconfigId: 'k8sconfig' )
-                       }
-                
-            }
+                script {
+                    kubernetesDeploy (configs: 'deploymentservice.yam', kubeconfigId: 'k8sconfig' )}
+                       } 
         }
+            
+        
 
    }
  }
