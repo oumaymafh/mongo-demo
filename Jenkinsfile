@@ -24,19 +24,19 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Docker Compose') {
-           steps {
-             script {
-                    sh 'docker-compose up -d'
-        }
-    }
-}
+       
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        docker.image("oumeymafarhat:devops-project").push()
+                    echo 'Building Docker image...'
+
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {t'
+
+                        sh "echo $PASS | docker login -u $USER --password-stdin"
+
+                        sh 'docker push oumeymafarhat:devops-project'
                     }
+                }
                 }
             }
         }
